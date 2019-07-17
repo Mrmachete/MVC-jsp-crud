@@ -49,7 +49,23 @@ public class PersonaOAD implements CRUD{
 
     @Override
     public Persona list(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql="select * from persona where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()) {
+   
+                p.setId(rs.getInt("id"));
+                p.setCedula(rs.getString("cedula"));
+                p.setNombre(rs.getString("nombre"));
+                
+                
+            }
+            
+        } catch (Exception e) {
+        }
+        return p;
     }
 
     @Override
@@ -69,13 +85,31 @@ public class PersonaOAD implements CRUD{
 
     @Override
     public boolean edit(Persona per) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql ="update persona set cedula='"+per.getCedula()+"',nombre='"+per.getNombre()+"'where id ="+per.getId();
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+    
+        return false;
     }
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql="delete from persona where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+        
+        return false;
     }
-    
+   
     
 }

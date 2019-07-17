@@ -54,7 +54,7 @@ public class Controlador extends HttpServlet {
        }else if (action.equalsIgnoreCase("add")) {
            acceso=add;
            
-            
+                    
         }
        else if (action.equalsIgnoreCase("agregar")) {
            String Cedula=request.getParameter("textCed");
@@ -66,6 +66,29 @@ public class Controlador extends HttpServlet {
            
             
         }
+       else if(action.equalsIgnoreCase("editar")){
+           
+           request.setAttribute("idper", request.getParameter("id"));
+           acceso=edit;
+       }
+       else if (action.equalsIgnoreCase("actualizar")){
+        int id =Integer.parseInt(request.getParameter("textid"));
+           String ced =request.getParameter("textCed");
+           String nom =request.getParameter("textNom");
+           p.setId(id);
+           p.setCedula(ced);
+           p.setNombre(nom);
+           oad.edit(p);
+           acceso=listar;
+           
+           
+       }
+       else if (action.equalsIgnoreCase("eliminar")){
+           int id = Integer.parseInt(request.getParameter("id"));
+           p.setId(id);
+           oad.eliminar(id);
+           acceso=listar;
+       }
 
         RequestDispatcher vista=request.getRequestDispatcher(acceso);
         vista.forward(request, response);

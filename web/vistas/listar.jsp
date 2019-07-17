@@ -45,8 +45,8 @@
                         <td><%= per.getCedula()%></td>
                         <td><%= per.getNombre()%></td>
                         <td>
-                            <a href="Controlador?accion" Editar </a>
-                            <a Remove</a>
+                            <a href="Controlador?accion=editar&id=<%=per.getId()%>">Editar</a>
+                            <a href="Controlador?accion=eliminar&id=<%=per.getId()%>">Eliminar</a>
                         </td>
                     </tr>
                 <%}%>
